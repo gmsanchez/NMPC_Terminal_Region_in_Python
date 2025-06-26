@@ -102,7 +102,7 @@ for k in range(N):
     # Control bounds
     opti.subject_to(opti.bounded(ulb, u_opti[:, k], uub))
     # State bounds
-    opti.subject_to(opti.bounded(xlb, u_opti[:, k], xub))
+    opti.subject_to(opti.bounded(xlb, x_opti[:, k], xub))
 # State bounds for last state
 opti.subject_to(opti.bounded(xlb, x_opti[:, N], xub))
 # Initial state constraint
