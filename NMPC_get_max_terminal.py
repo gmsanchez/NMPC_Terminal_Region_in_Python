@@ -98,7 +98,7 @@ def NMPC_get_max_terminal(mu, Q, R, ucon, xcon, alpha):
     for i in range(N):
         M11 = cvxpy.bmat([[cvxpy.matmul(-F[i], W.T) + cvxpy.matmul(-W, F[i].T), cvxpy.matmul(W1,Q**(0.5)), W2.T]])
         M22 = cvxpy.bmat([[cvxpy.matmul( W1, Q**(0.5)), W2.T]]).T
-        M23 =  alpha0 *cvxpy.bmat([[np.eye(Nx), np.zeros((Nx,Nu))], [np.zeros((Nu,Nx)), np.linalg.inv(R)]])
+        M23 =  alpha0 *cvxpy.bmat([[np.eye(n), np.zeros((n,m))], [np.zeros((m,n)), np.linalg.inv(R)]])
         MAT1 += [cvxpy.bmat([[M11], [M22, M23]])]
 
     for i in range(Nc):
@@ -130,7 +130,6 @@ def NMPC_get_max_terminal(mu, Q, R, ucon, xcon, alpha):
     elif alpha <= 0:
         raise('The alphaM must be larger than 0')
     else:
-
         prob = cvxpy.Problem(cvxpy.Minimize(obj), LMI1)
         prob.solve(solver=cvxpy.SCS, verbose=True, max_iters=100000, eps=1e-3)
 
