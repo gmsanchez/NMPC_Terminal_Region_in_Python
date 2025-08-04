@@ -82,8 +82,8 @@ def NMPC_get_max_terminal(mu, Q, R, ucon, xcon, alpha):
     n = Q.shape[0]
     m = R.shape[1]
 
-    alpha0 = cvxpy.Variable((1))
-    W1 = cvxpy.Variable((n,n))
+    alpha0 = cvxpy.Variable((1), pos=True)
+    W1 = cvxpy.Variable((n,n), symmetric=True)
     W2 = cvxpy.Variable((m,n))
     W = cvxpy.bmat([[W1, W2.T]])
 
